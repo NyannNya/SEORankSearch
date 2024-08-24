@@ -42,24 +42,24 @@ pip install -r requirements.txt
 ```
 
 ## 使用方法
-準備 CSV 文件，文件名為 data/your-file.csv，文件中每行包括關鍵字和對應的網站 URL，如下格式：
+準備 CSV 文件，文件名為 `data/your-file.csv`，文件中每行包括關鍵字和對應的網站 URL，如下格式：
 
-```csv
-keyword,website
-SEO tools,https://www.example.com
-python tutorials,https://www.example.org
-```
+| keyword           | website                    |
+|-------------------|----------------------------|
+| SEO tools         | https://www.example.com    |
+| python tutorials  | https://www.example.org    |
 
-執行`main.py`後，結果將被保存到 results 文件夾中，格式如下：
 
-```csv
-keyword,website,rank
-SEO tools,https://www.example.com,3
-python tutorials,https://www.example.org,1
-```
+執行`main.py`後，結果將被保存到 `results` 文件夾中，格式如下：
 
-- keyword: 你查詢的關鍵字
-- website: 對應的網站 URL
+| keyword           | website                    | google_rank |
+|-------------------|----------------------------|------|
+| SEO tools         | https://www.example.com    | 3    |
+| Python tutorials  | https://www.example.org    | 1    |
+
+- keyword: 關鍵字
+- website: 目標網站的 URL
+- google_rank : Google Search的排名
 
 ## 擴展功能
 目前此專案支援 Google 搜尋引擎的網站排名查詢（實作於 search/google.py 中）。
