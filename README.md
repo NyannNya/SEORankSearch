@@ -23,6 +23,7 @@ SEORankSearch
 └── search
     ├── keyword_rank_processor.py   # 處理 unit + data
     ├── unit
+    │   ├── google_serpapi.py       # Google Serpapi模組 (作為備用套件使用)
     │   ├── google.py               # Google 搜尋排名查詢的功能模組
     │   ├── yahoo.py                # Yahoo 搜尋排名查詢的功能模組
     │   └── __init__.py
@@ -46,6 +47,9 @@ pip install -r requirements.txt
 ```
 
 ## 使用方法
+
+在 serpap[https://serpapi.com/] 註冊取得API Key後到 `config.py` 設定 API-KEY，Free-plan 可以使用100次查詢/每小時
+
 準備 CSV 文件，文件名為 `data/your-file.csv`，文件中每行包括關鍵字和對應的網站 URL，如下格式：
 
 | keyword           | website            |

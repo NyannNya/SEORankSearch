@@ -5,9 +5,7 @@ from fake_useragent import UserAgent
 import re
 from urllib.parse import unquote
 
-def get_site_rank_for_keyword(keyword: str, website: str) -> int:
-    print(f"正在搜尋關鍵字 '{keyword}': {website} 在 Yahoo 的排名")
-    
+def get_site_rank_for_keyword(keyword: str, website: str) -> int:  
     query = keyword.replace(" ", "+")
     url = f"https://tw.search.yahoo.com/search?p={query}"
 

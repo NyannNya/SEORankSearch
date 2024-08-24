@@ -2,6 +2,7 @@ import os
 import csv
 from typing import Optional, Callable
 from search.unit.google import get_site_rank_for_keyword as rank_google
+from search.unit.google_serpapi import get_site_rank_for_keyword as rank_google_serpapi
 from search.unit.yahoo import get_site_rank_for_keyword as rank_yahoo
 
 class KeywordRankProcessor:
@@ -43,6 +44,9 @@ class KeywordRankProcessor:
                     website: str = row[1]
                     google_rank: Optional[int] = self.retry_ranking(rank_google, keyword, website)
                     yahoo_rank: Optional[int] = self.retry_ranking(rank_yahoo, keyword, website)
+                    if google_rank is None:
+                        google_rank = rank_google_serpapi(keyword, website)
+                    print(f"關鍵字：{keyword}，網站：{website}，Google 排名：{google_rank}，Yahoo 排名：{yahoo_rank}")
                     writer.writerow([keyword, website, google_rank, yahoo_rank])
                 else:
                     print(f"警告：行 {row} 格式不正確，已跳過")

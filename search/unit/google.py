@@ -5,8 +5,6 @@ from fake_useragent import UserAgent
 import re
 
 def get_site_rank_for_keyword(keyword: str, website: str) -> int:
-    print(f"正在搜尋關鍵字 '{keyword}': {website} 在 Google 的排名")
-
     query = keyword.replace(" ", "+")
     url = f"https://www.google.com/search?q={query}&num=50"
 
