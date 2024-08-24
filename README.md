@@ -14,7 +14,6 @@
 
 ```bash
 SEORankSearch
-├── .gitignore
 ├── data                            # 儲存待執行的資料 CSV 文件
 ├── results                         # 儲存執行爬蟲後的 CSV 文件
 ├── main.py                         # 主程式
