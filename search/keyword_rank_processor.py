@@ -1,7 +1,8 @@
 import os
 import csv
 from typing import Optional
-from search.unit.google import get_site_rank_for_keyword
+from search.unit.google import get_site_rank_for_keyword as rank_google
+from search.unit.yahoo import get_site_rank_for_keyword as rank_yahoo
 
 class KeywordRankProcessor:
     def __init__(self, input_directory: str, output_directory: str) -> None:
@@ -26,17 +27,18 @@ class KeywordRankProcessor:
             writer = csv.writer(outfile)
             
             # 寫入標題行
-            writer.writerow(['keyword', 'website', 'google_rank'])
+            writer.writerow(['keyword', 'website', 'google_rank', 'yahoo_rank'])
             next(reader, None)
             
             for row in reader:
                 if len(row) >= 2:
                     keyword: str = row[0]
                     website: str = row[1]
-                    google_rank: Optional[int] = get_site_rank_for_keyword(keyword, website)
+                    google_rank: Optional[int] = rank_google(keyword, website)
+                    yahoo_rank: Optional[int] = rank_yahoo(keyword, website)
                     if google_rank == -1:
                         google_rank = None
-                    writer.writerow([keyword, website, google_rank])
+                    writer.writerow([keyword, website, google_rank, yahoo_rank])
                 else:
                     print(f"警告：行 {row} 格式不正確，已跳過")
     

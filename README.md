@@ -21,7 +21,7 @@ SEORankSearch
 ├── requirements.txt                # 所需的 Python 套件列表
 └── search
     ├── google.py                   # Google 搜尋排名查詢的功能模組
-    └── yahoo.py                    # Yahoo 搜尋排名查詢的功能模組 (可擴展)
+    └── yahoo.py                    # Yahoo 搜尋排名查詢的功能模組
 ```
 
 
@@ -51,14 +51,18 @@ pip install -r requirements.txt
 
 執行`main.py`後，結果將被保存到 `results` 文件夾中，格式如下：
 
-| keyword           | website                    | google_rank |
-|-------------------|----------------------------|------|
-| SEO tools         | https://www.example.com    | 3    |
-| Python tutorials  | https://www.example.org    | 1    |
+| keyword           | website                    | google_rank |yahoo_rank| 
+|-------------------|----------------------------|-------------|----------|
+| SEO tools         | https://www.example.com    | 3           | 3        |
+| Python tutorials  | https://www.example.org    | 1           | 1        |
 
 - keyword: 關鍵字
 - website: 目標網站的 URL
-- google_rank : Google Search的排名
+- 新增排名
+    - 可使用的項目
+        - google_rank : Google Search的排名
+        - yahoo_rank : Yahoo Search的排名
+    - 如果找不到或超過100名，則不顯示排名
 
 ## 擴展功能
 目前此專案支援 Google 搜尋引擎的網站排名查詢（實作於 search/google.py 中）。
