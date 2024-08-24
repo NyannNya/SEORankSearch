@@ -1,0 +1,2 @@
+.venv/
+del__pycache__.py

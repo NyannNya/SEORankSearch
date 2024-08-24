@@ -1,0 +1,30 @@
+import requests
+from bs4 import BeautifulSoup
+import random
+from fake_useragent import UserAgent
+import re
+
+def get_site_rank_for_keyword(keyword: str, website: str) -> int:
+    query = keyword.replace(" ", "+")
+    url = f"https://www.google.com/search?q={query}&num=100"
+
+    ua = UserAgent()
+    headers = {
+        "User-Agent": ua.random
+    }
+
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    links = soup.find_all("a", href=re.compile("^/url\?q="))
+        
+    rank = 0
+    for link in links:
+        href = link.get("href")
+        if href and href.startswith("/url?q="):
+            actual_url = href.split("/url?q=")[1].split("&")[0]
+            rank += 1
+            if website in actual_url:
+                return rank   
+    return -1  
+
