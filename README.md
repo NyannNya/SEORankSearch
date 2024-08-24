@@ -48,16 +48,16 @@ pip install -r requirements.txt
 ## 使用方法
 準備 CSV 文件，文件名為 `data/your-file.csv`，文件中每行包括關鍵字和對應的網站 URL，如下格式：
 
-| keyword           | website                    |
-|-------------------|----------------------------|
+| keyword           | website            |
+|-------------------|--------------------|
 | SEO tools         | www.example.com    |
 | python tutorials  | www.example.org    |
 
 
 執行`main.py`後，結果將被保存到 `results` 文件夾中，格式如下：
 
-| keyword           | website                    | google_rank |yahoo_rank| 
-|-------------------|----------------------------|-------------|----------|
+| keyword           | website            | google_rank |yahoo_rank| 
+|-------------------|--------------------|-------------|----------|
 | SEO tools         | www.example.com    | 3           | 3        |
 | Python tutorials  | www.example.org    | 1           | 1        |
 
