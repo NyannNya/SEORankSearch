@@ -60,7 +60,6 @@ python tutorials,https://www.example.org,1
 
 - keyword: 你查詢的關鍵字
 - website: 對應的網站 URL
-- rank: 該網站對應關鍵字的排名，若未找到排名則顯示 None
 
 ## 擴展功能
 目前此專案支援 Google 搜尋引擎的網站排名查詢（實作於 search/google.py 中）。

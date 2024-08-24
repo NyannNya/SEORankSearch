@@ -26,17 +26,17 @@ class KeywordRankProcessor:
             writer = csv.writer(outfile)
             
             # 寫入標題行
-            writer.writerow(['keyword', 'website', 'rank'])
+            writer.writerow(['keyword', 'website', 'google_rank'])
             next(reader, None)
             
             for row in reader:
                 if len(row) >= 2:
                     keyword: str = row[0]
                     website: str = row[1]
-                    rank: Optional[int] = get_site_rank_for_keyword(keyword, website)
-                    if rank == -1:
-                        rank = None
-                    writer.writerow([keyword, website, rank])
+                    google_rank: Optional[int] = get_site_rank_for_keyword(keyword, website)
+                    if google_rank == -1:
+                        google_rank = None
+                    writer.writerow([keyword, website, google_rank])
                 else:
                     print(f"警告：行 {row} 格式不正確，已跳過")
     
