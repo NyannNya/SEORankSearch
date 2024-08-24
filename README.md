@@ -50,16 +50,16 @@ pip install -r requirements.txt
 
 | keyword           | website                    |
 |-------------------|----------------------------|
-| SEO tools         | https://www.example.com    |
-| python tutorials  | https://www.example.org    |
+| SEO tools         | www.example.com    |
+| python tutorials  | www.example.org    |
 
 
 執行`main.py`後，結果將被保存到 `results` 文件夾中，格式如下：
 
 | keyword           | website                    | google_rank |yahoo_rank| 
 |-------------------|----------------------------|-------------|----------|
-| SEO tools         | https://www.example.com    | 3           | 3        |
-| Python tutorials  | https://www.example.org    | 1           | 1        |
+| SEO tools         | www.example.com    | 3           | 3        |
+| Python tutorials  | www.example.org    | 1           | 1        |
 
 - keyword: 關鍵字
 - website: 目標網站的 URL
