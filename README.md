@@ -17,11 +17,16 @@ SEORankSearch
 ├── data                            # 儲存待執行的資料 CSV 文件
 ├── results                         # 儲存執行爬蟲後的 CSV 文件
 ├── main.py                         # 主程式
-├── README.md                       # 專案說明文件
 ├── requirements.txt                # 所需的 Python 套件列表
+├── LICENSE.txt                     # 授權條款
+├── README.md                       # 專案說明文件
 └── search
-    ├── google.py                   # Google 搜尋排名查詢的功能模組
-    └── yahoo.py                    # Yahoo 搜尋排名查詢的功能模組
+    ├── keyword_rank_processor.py   # 處理 unit + data
+    ├── unit
+    │   ├── google.py               # Google 搜尋排名查詢的功能模組
+    │   ├── yahoo.py                # Yahoo 搜尋排名查詢的功能模組
+    │   └── __init__.py
+    └── __init__.py
 ```
 
 
