@@ -1,6 +1,6 @@
 import os
 import csv
-from typing import Optional
+from typing import Optional, Callable
 from search.unit.google import get_site_rank_for_keyword as rank_google
 from search.unit.yahoo import get_site_rank_for_keyword as rank_yahoo
 
@@ -14,6 +14,13 @@ class KeywordRankProcessor:
         """
         self.input_directory = input_directory
         self.output_directory = output_directory
+
+    def retry_ranking(self, func: Callable[[str, str], Optional[int]], keyword: str, website: str, retries: int = 3) -> Optional[int]:
+        for attempt in range(retries):
+            result = func(keyword, website)
+            if result is not None:
+                return result
+        return None
     
     def process_keywords_and_websites(self, input_file: str, output_file: str) -> None:
         """
@@ -34,10 +41,8 @@ class KeywordRankProcessor:
                 if len(row) >= 2:
                     keyword: str = row[0]
                     website: str = row[1]
-                    google_rank: Optional[int] = rank_google(keyword, website)
-                    yahoo_rank: Optional[int] = rank_yahoo(keyword, website)
-                    if google_rank == -1:
-                        google_rank = None
+                    google_rank: Optional[int] = self.retry_ranking(rank_google, keyword, website)
+                    yahoo_rank: Optional[int] = self.retry_ranking(rank_yahoo, keyword, website)
                     writer.writerow([keyword, website, google_rank, yahoo_rank])
                 else:
                     print(f"警告：行 {row} 格式不正確，已跳過")

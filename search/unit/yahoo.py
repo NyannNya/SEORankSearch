@@ -6,6 +6,8 @@ import re
 from urllib.parse import unquote
 
 def get_site_rank_for_keyword(keyword: str, website: str) -> int:
+    print(f"正在搜尋關鍵字 '{keyword}': {website} 在 Yahoo 的排名")
+    
     query = keyword.replace(" ", "+")
     url = f"https://tw.search.yahoo.com/search?p={query}"
 
@@ -15,7 +17,8 @@ def get_site_rank_for_keyword(keyword: str, website: str) -> int:
         "Accept-Language": "en-US,en;q=0.9",
         "Accept-Encoding": "gzip, deflate, br",
         "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1"
+        "Upgrade-Insecure-Requests": "1",
+        "Referer": "https://tw.search.yahoo.com/",
     }
 
     response = requests.get(url, headers=headers)
@@ -42,6 +45,6 @@ def get_site_rank_for_keyword(keyword: str, website: str) -> int:
             actual_url = unquote(encoded_url)
             rank += 1
             if website in actual_url:
-                return rank   
-    return -1
+                return rank
+    return None
 

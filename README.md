@@ -52,7 +52,7 @@ pip install -r requirements.txt
 |-------------------|--------------------|
 | SEO tools         | www.example.com    |
 | python tutorials  | www.example.org    |
-
+URL
 
 執行`main.py`後，結果將被保存到 `results` 文件夾中，格式如下：
 
@@ -67,7 +67,7 @@ pip install -r requirements.txt
     - 可使用的項目
         - google_rank : Google Search的排名
         - yahoo_rank : Yahoo Search的排名
-    - 如果找不到或超過100名，則不顯示排名
+    - 如果找不到或超過50名，則不顯示排名
 
 ## 擴展功能
 目前此專案支援 Google 搜尋引擎的網站排名查詢（實作於 search/google.py 中）。
