@@ -9,7 +9,10 @@ def get_site_rank_for_keyword(query: str, site: str) -> int:
     params = {
         'q': query,
         'num': 100,  # 設定每頁的搜尋結果數量
-        'api_key': api_key
+        'api_key': api_key,
+        'location': 'Taiwan',  # 設定搜尋地區為台灣
+        'hl': 'zh-TW',  # 設定語言為繁體中文
+        'gl': 'tw'  # 設定搜尋地區代碼為台灣
     }
 
     rank = 0

@@ -45,7 +45,11 @@ class KeywordRankProcessor:
                     google_rank: Optional[int] = self.retry_ranking(rank_google, keyword, website)
                     yahoo_rank: Optional[int] = self.retry_ranking(rank_yahoo, keyword, website)
                     if google_rank is None:
-                        google_rank = rank_google_serpapi(keyword, website)
+                        try:
+                            google_rank = rank_google_serpapi(keyword, website)
+                        except:
+                            print(f"Google 搜尋失敗，關鍵字：{keyword}，網站：{website}")
+                            continue                            
                     print(f"關鍵字：{keyword}，網站：{website}，Google 排名：{google_rank}，Yahoo 排名：{yahoo_rank}")
                     writer.writerow([keyword, website, google_rank, yahoo_rank])
                 else:

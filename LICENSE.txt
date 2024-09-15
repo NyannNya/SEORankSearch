@@ -1,7 +1,3 @@
-
-To create the `LICENSE` file with the MIT License, add the following content:
-
-```text
 MIT License
 
 Copyright (c) 2024 NyannNya

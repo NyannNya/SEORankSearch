@@ -6,7 +6,7 @@ import re
 
 def get_site_rank_for_keyword(keyword: str, website: str) -> int:
     query = keyword.replace(" ", "+")
-    url = f"https://www.google.com/search?q={query}&num=50"
+    url = f"https://www.google.com/search?q={query}&num=50&hl=zh-TW&gl=tw&uule=w+CAIQICIGVGFpd2Fu"
 
     ua = UserAgent()
     headers = {
