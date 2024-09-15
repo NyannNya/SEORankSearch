@@ -1,34 +1,24 @@
-import requests
-from bs4 import BeautifulSoup
-import random
-from fake_useragent import UserAgent
-import re
+from googleapiclient.discovery import build
+from . import credentials, google_search_engine_id
 
 def get_site_rank_for_keyword(keyword: str, website: str) -> int:
-    query = keyword.replace(" ", "+")
-    url = f"https://www.google.com/search?q={query}&num=50&hl=zh-TW&gl=tw&uule=w+CAIQICIGVGFpd2Fu"
+    service = build('customsearch', 'v1', credentials=credentials)
 
-    ua = UserAgent()
-    headers = {
-        "User-Agent": ua.random,
-        "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1",
-        "Referer": "https://www.google.com/",
-    }
+    for start_index in range(1, 51, 10):  # 每次檢索10個結果，最多到第50個結果
+        result = service.cse().list(
+            q=keyword,
+            cx=google_search_engine_id,
+            num=10, 
+            start=start_index,
+            hl='zh-TW',  # 使用繁體中文的界面
+        ).execute()
 
-    response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.text, "html.parser")
-    
-    links = soup.find_all("a", href=re.compile("^/url\?q="))
+        if 'items' not in result:
+            print("未找到结果或发生错误。")
+            return None
 
-    rank = 0
-    for link in links:
-        href = link.get("href")
-        if href and href.startswith("/url?q="):
-            actual_url = href.split("/url?q=")[1].split("&")[0]
-            rank += 1
-            if website in actual_url:
-                return rank   
+        for rank, item in enumerate(result['items'], start=start_index):
+            if website in item['link']:
+                return rank
+
     return None

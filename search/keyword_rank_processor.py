@@ -2,7 +2,6 @@ import os
 import csv
 from typing import Optional, Callable
 from search.unit.google import get_site_rank_for_keyword as rank_google
-from search.unit.google_serpapi import get_site_rank_for_keyword as rank_google_serpapi
 from search.unit.yahoo import get_site_rank_for_keyword as rank_yahoo
 
 class KeywordRankProcessor:
@@ -15,13 +14,6 @@ class KeywordRankProcessor:
         """
         self.input_directory = input_directory
         self.output_directory = output_directory
-
-    def retry_ranking(self, func: Callable[[str, str], Optional[int]], keyword: str, website: str, retries: int = 3) -> Optional[int]:
-        for attempt in range(retries):
-            result = func(keyword, website)
-            if result is not None:
-                return result
-        return None
     
     def process_keywords_and_websites(self, input_file: str, output_file: str) -> None:
         """
@@ -42,14 +34,8 @@ class KeywordRankProcessor:
                 if len(row) >= 2:
                     keyword: str = row[0]
                     website: str = row[1]
-                    google_rank: Optional[int] = self.retry_ranking(rank_google, keyword, website)
-                    yahoo_rank: Optional[int] = self.retry_ranking(rank_yahoo, keyword, website)
-                    if google_rank is None:
-                        try:
-                            google_rank = rank_google_serpapi(keyword, website)
-                        except:
-                            print(f"Google 搜尋失敗，關鍵字：{keyword}，網站：{website}")
-                            continue                            
+                    google_rank = rank_google(keyword, website)
+                    yahoo_rank= rank_yahoo(keyword, website)
                     print(f"關鍵字：{keyword}，網站：{website}，Google 排名：{google_rank}，Yahoo 排名：{yahoo_rank}")
                     writer.writerow([keyword, website, google_rank, yahoo_rank])
                 else:
